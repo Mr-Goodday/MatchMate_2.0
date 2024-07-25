@@ -1,0 +1,67 @@
+/* =============================================================================== Hero Section */
+
+.hero-section {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 80vh;
+
+    background: url(img/background1.png);
+    background-position: center;
+    background-size: cover;
+
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: var(--background_shade_opacity06);
+    }
+
+    * {
+        z-index: 2;
+    }
+
+    h1 {
+        max-width: 20ch;
+        text-align: center;
+        background: var(--primary_gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+/* ============================================================================== Title Section */
+
+.title-section {
+    position: relative;
+
+    &::before {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        top: calc(var(--gap) * -1);
+        left: 50%;
+        transform: translateX(-50%);
+
+        height: calc(var(--header_height) * 3);
+        width: calc(100svw - 1rem);
+
+        background: var(--primary_gradient);
+    }
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+
+    padding: 3rem;
+
+    border-radius: 1rem;
+    background: var(--background);
+    box-shadow: var(--shadow);
+}
