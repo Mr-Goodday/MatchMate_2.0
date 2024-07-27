@@ -5,14 +5,21 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
 
-    min-height: 80vh;
+    min-height: 70vh;
+    padding-inline: var(--gap);
 
-    background: url(img/background1.png);
-    background-position: center;
+    background: linear-gradient(
+            180deg,
+            transparent,
+            var(--background_shade) 95% 100%
+        ),
+        url(img/background1.png);
+    background-position: top;
     background-size: cover;
+    background-repeat: no-repeat;
 
     &:before {
         content: "";
@@ -27,11 +34,19 @@
     }
 
     h1 {
+        margin-bottom: 1rem;
         max-width: 20ch;
         text-align: center;
         background: var(--primary_gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+}
+
+@media (max-width: 700px) {
+    .hero-section > h1 {
+        line-height: 110%;
+        font-size: 12vmin;
     }
 }
 
@@ -44,7 +59,7 @@
         z-index: -1;
         content: "";
         position: absolute;
-        top: calc(var(--gap) * -1);
+        top: 0;
         left: 50%;
         transform: translateX(-50%);
 
@@ -58,6 +73,7 @@
 .title-container {
     display: flex;
     flex-direction: column;
+    margin-top: var(--gap);
 
     padding: 3rem;
 
@@ -65,3 +81,76 @@
     background: var(--background);
     box-shadow: var(--shadow);
 }
+
+/* ========================================================================= text image section */
+
+.text-image-section {
+    display: flex;
+    gap: 1rem;
+
+    &:has(.text-last) {
+        flex-direction: row-reverse;
+    }
+
+    > * {
+        width: calc(50% - 0.5rem);
+    }
+
+    h1 {
+        color: var(--accent);
+    }
+}
+
+.text,
+.text-last {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 700px) {
+    .text-image-section {
+        flex-direction: column;
+
+        &:has(.text-last) {
+            flex-direction: column;
+        }
+
+        > * {
+            width: 100%;
+        }
+    }
+}
+
+/* ========================================================================== flex grid section */
+
+.flex-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 1rem;
+    gap: 2rem;
+
+    a {
+        display: flex;
+        width: fit-content;
+        gap: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    img {
+        height: 4rem;
+        aspect-ratio: 1;
+        max-width: 50%;
+    }
+}
+
+/* ================================================================================ faq section */
+/* TODO: Zrobić sekcję FAQ, ważne:
+- pytanie ma być widoczne cały czas
+- odpowiedź ma być widoczna po kliknięciu na pytanie
+- ponowne kliknięcie na pytanie ma chować odpowiedź
+- zmień styl ::marker */

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <link
+            rel="shortcut icon"
+            href="../../src/img/MatchMate_logo.png"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="../../src/global.css" />
+        <link rel="stylesheet" href="../../src/sections.css" />
+        <link rel="stylesheet" href="../styles.css" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MatchMate</title>
+    </head>
+    <body id="top">
+        <form action="">
+            <div>
+                <h2>Zarejestruj się</h2>
+                <p type="secondary">
+                    Rzeczy oznaczone gwiazdką są obowiązkowe.
+                </p>
+            </div>
+
+            <label for="name">
+                Imię:<span class="star">*</span>
+                <input type="text" name="name" id="name" required />
+            </label>
+
+            <label for="sex">
+                Płeć:
+                <select name="sex" id="sex">
+                    <option value=""></option>
+                    <option value="m">Mężczyzna</option>
+                    <option value="f">Kobieta</option>
+                    <option value="d">Inna</option>
+                </select>
+            </label>
+
+            <label for="age">
+                Data urodzenia:<span class="validity"></span>
+                <input type="date" name="age" id="age" min="1907-03-04" />
+            </label>
+
+            <label for="communicator">
+                Wybierz komunikator:<span class="star">*</span>
+                <select name="communicator" id="communicator" required>
+                    <option value=""></option>
+                    <option value="Discord">Discord</option>
+                    <option value="TeamSpeak">TeamSpeak</option>
+                </select>
+            </label>
+
+            <label for="passwd">
+                Podaj swoje konto na
+                <span id="communicator_input">wybranym komunikatorze</span>:
+                <span class="star">*</span>
+                <input
+                    type="text"
+                    name="communicator_account"
+                    id="communicator_account"
+                    required
+                />
+            </label>
+
+            <label for="description">
+                Opis:
+                <textarea name="description" id="description"></textarea>
+            </label>
+
+            <input type="submit" value="Zarejestruj" />
+        </form>
+
+        <p
+            style="
+                position: absolute;
+                top: 100%;
+                margin: 0;
+                width: 100%;
+                max-width: unset;
+                padding: 4px 0;
+                background: black;
+                color: white;
+                text-align: center;
+                font-size: 16px;
+            "
+        >
+            © 2024 Cors • This website is designed by
+            <a
+                href="http://goodday.great-site.net/"
+                target="_blank"
+                title="goodday.great-site.net/"
+                style="color: #69ccff"
+                >Mr.GoodDay</a
+            >.
+        </p>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                const today = new Date().toISOString().split("T")[0];
+                document.getElementById("age").setAttribute("max", today);
+
+                const communicatorSelect =
+                    document.getElementById("communicator");
+                const communicatorInput =
+                    document.getElementById("communicator_input");
+
+                communicatorSelect.addEventListener("change", (event) => {
+                    const selectedOption = event.target.value;
+                    communicatorInput.textContent = selectedOption
+                        ? selectedOption
+                        : "wybranym komunikatorze";
+                });
+            });
+        </script>
+    </body>
+</html>

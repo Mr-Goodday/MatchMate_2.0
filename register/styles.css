@@ -1,0 +1,28 @@
+body {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: var(--gap);
+
+    background: linear-gradient(
+            180deg,
+            transparent,
+            var(--background_shade) 95% 100%
+        ),
+        url(../src/img/background1.png);
+    background-position: top;
+    background-size: cover;
+
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: var(--background_shade_opacity06);
+    }
+}

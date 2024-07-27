@@ -73,7 +73,7 @@
 
     --gap: clamp(2rem, 8vw, 4rem);
     --full: minmax(var(--gap), 1fr);
-    --content: min(80ch, 100% - var(--gap) * 2);
+    --content: min(100ch, 100% - var(--gap) * 2);
     --popout: minmax(0, 4rem);
     --feature: minmax(0, 8rem);
 
@@ -87,7 +87,7 @@
 html {
     hanging-punctuation: first last;
     color-scheme: dark;
-    /* scroll-padding-top: calc(var(--header_height) + 32px); */
+    scroll-padding-top: calc(var(--header_height) + var(--gap));
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -138,6 +138,31 @@ body > * {
     background-color: var(--primary);
 }
 
+/* ========================================================================= Back to top button */
+
+.back-To-Top {
+    --backToTop_Width: 50px;
+    --backToTop_Gap: calc((var(--gap) - var(--backToTop_Width)) / 2);
+
+    z-index: 999;
+    position: fixed;
+    bottom: var(--backToTop_Gap);
+    right: var(--backToTop_Gap);
+
+    aspect-ratio: 1;
+    width: var(--backToTop_Width);
+
+    border-radius: 50%;
+    background: url(img/arrow-up-circle-outline.svg), var(--primary_gradient);
+    box-shadow: var(--shadow);
+}
+
+@media (max-width: 800px) {
+    .backToTop {
+        display: none;
+    }
+}
+
 /* ============================================================================== Scroll Viewer */
 
 #scroll-viewer {
@@ -181,10 +206,10 @@ h6 {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 5rem;
     letter-spacing: -2px;
     font-weight: 900;
-    line-height: 4.5rem;
+    line-height: 5.5rem;
 }
 
 h2 {
@@ -200,6 +225,14 @@ h3 {
 
 h4 {
     font-size: 1.5rem;
+}
+
+/* ================================================================================ FontAwesome */
+
+i {
+    padding: 0;
+    padding-right: 0.5rem;
+    color: inherit;
 }
 
 /* ================================================================================= Paragraphs */
@@ -277,9 +310,62 @@ a {
         background-color: var(--accent);
     }
 
-    &:not(:has(button)):is(:hover, :focus-visible)::before {
+    &:not(:has(button), .back-To-Top):is(:hover, :focus-visible)::before {
         transform: scaleX(1);
     }
+}
+
+/* ===================================================================================== inputs */
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+    cursor: pointer;
+
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+
+    border-radius: var(--border_radius);
+    border: 2px solid var(--primary_shade);
+    background: var(--background);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.star,
+.validity,
+.forgot-passwd {
+    position: absolute;
+    right: 0;
+
+    width: fit-content;
+
+    font-size: 2rem;
+    color: var(--accent);
+}
+
+.forgot-passwd {
+    top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.validity {
+    margin-left: auto;
+}
+
+input[type="date"]:invalid + span.validity::after {
+    content: "✖";
+    color: var(--error_clr);
+}
+
+input[type="date"]:valid + span.validity::after {
+    content: "✓";
+    color: var(--success_clr);
 }
 
 /* ==================================================================================== buttons */
@@ -299,6 +385,7 @@ a {
 button,
 button[type="button"],
 input[type="submit"] {
+    width: fit-content;
     padding: 0.5rem 2rem;
 
     border-radius: var(--border_radius);
@@ -349,6 +436,55 @@ button[disabled="disabled"] {
 
     a:last-child > button {
         background: var(--primary_shade);
+    }
+}
+
+/* ====================================================================================== Form */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: min(50ch, 100%);
+    padding: 2rem;
+    gap: 2rem;
+
+    border-radius: var(--border_radius);
+    border: 2px solid var(--background);
+    background: var(--background_shade_opacity06);
+
+    * {
+        width: 100%;
+    }
+
+    p {
+        margin: 0;
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    div {
+        display: grid;
+        place-items: center;
+        margin-top: 2rem;
+
+        p {
+            margin-top: 0.5rem;
+        }
+    }
+
+    label {
+        position: relative;
+    }
+}
+
+@media (max-width: 450px) {
+    form h2 {
+        font-size: 10vmin;
     }
 }
 
@@ -416,6 +552,10 @@ nav {
             color: var(--secondary);
             filter: drop-shadow(var(--glow));
 
+            i {
+                color: var(--secondary);
+            }
+
             &::before {
                 transform: scaleX(0.85);
                 box-shadow: var(--glow);
@@ -427,6 +567,54 @@ nav {
         }
     }
 }
+
+/* =================================================================================== side nav */
+
+aside {
+    position: sticky;
+    top: calc(var(--header_height) + 2rem);
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem;
+    height: calc(100svh - var(--header_height) - 4rem);
+    width: 256px;
+
+    border-radius: var(--border_radius);
+    border: 2px solid var(--background);
+    background: var(--background_shade_opacity06);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+
+    a {
+        width: 100%;
+        padding: 1rem;
+        color: var(--text);
+        border-bottom: 2px solid var(--background);
+
+        &:hover {
+            backdrop-filter: brightness(2);
+        }
+
+        span {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            font-size: 24px;
+            color: gold;
+        }
+    }
+}
+
+/* ============================================================================= hamburger manu */
+/* TODO: Zrobić respąsywny hamburger menu, ważne: 
+- zwykły nav ma się zmieniać w hamburgera jak ekran ma 1280px lub mniej
+- nav ma się wysuwać od lewej
+- ikona hamburgera (do otweiranai) ma się zmieniać w krzyżyk po otworzeniu 
+- iconki znajdziesz w fonderze img/ */
 
 /* ======================================================================================= main */
 
@@ -469,18 +657,61 @@ main > :not(.full-bg, .popout, .feature, .full),
     grid-column: content;
 }
 
+main[type="2"] {
+    position: relative;
+
+    min-height: 100svh;
+    display: flex;
+    padding: 0;
+    gap: 0;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 100svh;
+
+        background: linear-gradient(
+                180deg,
+                var(--background_shade_opacity06),
+                var(--background_shade) 95% 100%
+            ),
+            url(img/background1.png);
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
 /* ===================================================================================== footer */
 
 footer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    padding: var(--gap);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: calc(var(--gap) / 2) var(--gap);
 
     background: black;
 
-    ul {
-        display: flex;
+    img {
+        max-width: 256px;
+    }
+
+    hr {
+        width: 100%;
+        margin-block: 2rem;
+        border-color: var(--primary_shade);
+        border-style: solid;
+    }
+}
+
+@media (max-width: 903px) {
+    footer nav {
         flex-direction: column;
-        justify-content: center;
+
+        a {
+            width: 100%;
+        }
     }
 }
