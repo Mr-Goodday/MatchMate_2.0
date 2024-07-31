@@ -150,7 +150,25 @@
 
 /* ================================================================================ faq section */
 /* TODO: Zrobić sekcję FAQ, ważne:
-- pytanie ma być widoczne cały czas
+- pytanie ma być widoczne cały czas +
 - odpowiedź ma być widoczna po kliknięciu na pytanie
 - ponowne kliknięcie na pytanie ma chować odpowiedź
-- zmień styl ::marker */
+- zmień styl ::marker 
+- zmienić rogi przycisku na kąt 90*/
+.faq-container {
+
+    hr {
+        color:blueviolet;
+        background-color: blueviolet; 
+        height: 3px;
+    }
+    button {
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        
+    }
+    
+
+}

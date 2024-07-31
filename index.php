@@ -76,6 +76,12 @@
         <section class="feature" id="faq">
             <h2>FAQ</h2>
             <ul class="faq-container">
+                <button style="width: 100%; height: auto;">
+                    <li style="width: 100px">Pytanie?  <!-- To jest most likely do poprawy --> 
+                    </li>
+                </button>
+                <hr style="color: blueviolet; background-color: blueviolet; height: 3px;">
+                <p>Odpowiedź!</p>
                 <li>Pytanie?
                     <p>Odpowiedź!</p>
                 </li>
@@ -84,12 +90,9 @@
                 </li>
                 <li>Pytanie?
                     <p>Odpowiedź!</p>
-                </li>
-                <li>Pytanie?
-                    <p>Odpowiedź!</p>
-                </li>
-            </ul>
-        </section>
+                </li> 
+            </ul> 
+            </section>
 
         <section class="flex-grid-section popout">
             <h2>Obserwuj nas</h2>
